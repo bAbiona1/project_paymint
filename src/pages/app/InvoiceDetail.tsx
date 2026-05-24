@@ -249,7 +249,7 @@ export default function InvoiceDetail() {
                 {invoice.amount_paid > 0 && (
                   <div className="flex justify-between text-sm">
                     <span className="text-[var(--paymint-success-text)]">Paid</span>
-                    <span className="font-mono text-[var(--paymint-success-text)]">-{formatCurrency(invoice.amount_paid)}</span>
+                    <span className="font-mono text-[var(--paymint-text-primary)]">-{formatCurrency(invoice.amount_paid)}</span>
                   </div>
                 )}
                 {invoice.balance_due > 0 && (
@@ -283,7 +283,7 @@ export default function InvoiceDetail() {
               </div>
               <div>
                 <p className="text-xs text-[var(--paymint-text-tertiary)]">Amount Paid</p>
-                <p className="text-lg font-semibold font-mono text-[var(--paymint-success-text)]">{formatCurrency(invoice.amount_paid)}</p>
+                <p className="text-lg font-semibold font-mono text-[var(--paymint-text-primary)]">{formatCurrency(invoice.amount_paid)}</p>
               </div>
               <div className="border-t border-[var(--paymint-surface-border)] pt-3">
                 <p className="text-xs text-[var(--paymint-text-tertiary)]">Balance Due</p>
@@ -320,7 +320,7 @@ export default function InvoiceDetail() {
                         <p className="text-xs text-[var(--paymint-text-tertiary)] italic">{p.notes}</p>
                       )}
                     </div>
-                    <span className="text-sm font-semibold font-mono text-[var(--paymint-success-text)] flex-shrink-0">
+                    <span className="text-sm font-semibold font-mono text-[var(--paymint-text-primary)] flex-shrink-0">
                       {formatCurrency(p.amount)}
                     </span>
                   </div>
