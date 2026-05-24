@@ -109,7 +109,7 @@ export default function ClientDetail() {
           </div>
           <div className="bg-white border border-[var(--paymint-surface-border)] rounded-xl p-5 shadow-sm">
             <p className="text-xs text-[var(--paymint-text-tertiary)] mb-1">Total Paid</p>
-            <p className="text-2xl font-semibold font-mono text-[var(--paymint-success-text)]">{formatCurrency(totalPaid)}</p>
+            <p className="text-2xl font-semibold font-mono text-[var(--paymint-text-primary)]">{formatCurrency(totalPaid)}</p>
           </div>
           <div className="bg-white border border-[var(--paymint-surface-border)] rounded-xl p-5 shadow-sm">
             <p className="text-xs text-[var(--paymint-text-tertiary)] mb-1">Invoices</p>
