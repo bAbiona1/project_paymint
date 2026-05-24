@@ -75,7 +75,7 @@ export default function Receipts() {
                       <td className="px-4 py-3.5 text-sm text-[var(--paymint-text-secondary)] hidden sm:table-cell">
                         {formatDate(r.issued_at)}
                       </td>
-                      <td className="px-4 py-3.5 text-right text-sm font-semibold font-mono text-[var(--paymint-success-text)]">
+                      <td className="px-4 py-3.5 text-right text-sm font-semibold font-mono text-[var(--paymint-text-primary)]">
                         {formatCurrency(r.total_paid)}
                       </td>
                       <td className="px-4 py-3.5 text-center hidden sm:table-cell">
