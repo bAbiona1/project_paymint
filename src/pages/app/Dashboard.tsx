@@ -127,7 +127,7 @@ export default function Dashboard() {
               <button
                 key={value}
                 onClick={() => setTimeRange(value)}
-                className={`h-8 px-3 text-xs font-medium rounded-full transition-colors ${
+                className={`h-8 px-3 text-xs font-medium rounded-full transition-colors whitespace-nowrap ${
                   timeRange === value
                     ? 'bg-[var(--paymint-text-primary)] text-white'
                     : 'text-[var(--paymint-text-secondary)] hover:bg-[var(--paymint-surface-subtle)]'
