@@ -140,7 +140,7 @@ export default function ReceiptDetail() {
               <p className="text-xs font-semibold tracking-wider uppercase text-[var(--paymint-success-text)]">
                 Total Received
               </p>
-              <p className="text-2xl font-bold font-mono text-[var(--paymint-success-text)] mt-0.5">
+              <p className="text-2xl font-bold font-mono text-[var(--paymint-text-primary)] mt-0.5">
                 {formatCurrency(receipt.total_paid)}
               </p>
             </div>
