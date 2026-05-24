@@ -11,7 +11,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'default', loading, icon, children, disabled, ...props }, ref) => {
-    const base = 'inline-flex items-center justify-center gap-2 font-semibold rounded-md transition-all duration-[120ms] ease-out focus-visible:outline-none disabled:opacity-50 disabled:cursor-not-allowed select-none';
+    const base = 'inline-flex items-center justify-center gap-2 font-semibold rounded-md transition-all duration-[120ms] ease-out focus-visible:outline-none disabled:opacity-50 disabled:cursor-not-allowed select-none whitespace-nowrap';
 
     const variants = {
       primary: 'bg-[var(--paymint-primary-600)] text-white hover:bg-[var(--paymint-primary-500)] active:bg-[var(--paymint-primary-700)]',
@@ -22,8 +22,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const sizes = {
       sm: 'h-8 px-3 text-xs',
-      default: 'h-10 px-4 text-sm',
-      lg: 'h-11 px-6 text-sm',
+      // slightly smaller on narrow screens, larger on md+
+      default: 'h-8 px-3 text-sm md:h-10 md:px-4 md:text-sm',
+      lg: 'h-9 px-4 text-sm md:h-11 md:px-6 md:text-sm',
     };
 
     return (
