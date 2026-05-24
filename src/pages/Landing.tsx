@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, FileText, CreditCard, BarChart3, Star } from 'lucide-react';
+import { CheckCircle, FileText, CreditCard, BarChart3, Star } from 'lucide-react';
 import Logo from '../components/Logo';
 
 export default function Landing() {
@@ -11,7 +11,7 @@ export default function Landing() {
         <div className="flex items-center gap-2">
           <Link
             to="/login"
-            className="h-9 px-4 text-sm font-medium text-[var(--paymint-text-secondary)] hover:text-[var(--paymint-text-primary)] transition-colors"
+            className="inline-flex items-center h-9 px-4 text-sm font-medium text-[var(--paymint-text-secondary)] hover:text-[var(--paymint-text-primary)] transition-colors"
           >
             Log in
           </Link>
@@ -43,34 +43,22 @@ export default function Landing() {
             </p>
 
             <div className="flex items-center gap-4 mb-8">
-              <Link
-                to="/signup"
-                className="inline-flex items-center gap-2 h-12 px-8 text-base font-semibold text-white bg-[var(--paymint-primary-600)] rounded-full hover:bg-[var(--paymint-primary-500)] transition-colors"
-              >
-                Get Started Free
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+                <Link
+                  to="/signup"
+                  className="inline-flex items-center gap-2 h-9 px-4 text-sm font-semibold text-white bg-[var(--paymint-primary-600)] rounded-full hover:bg-[var(--paymint-primary-500)] transition-colors"
+                >
+                  Get Started
+                </Link>
               <Link
                 to="/login"
                 className="text-sm font-medium text-[var(--paymint-text-secondary)] hover:text-[var(--paymint-text-primary)] transition-colors"
               >
-                Sign in →
+                Sign in
               </Link>
             </div>
 
             {/* Social proof */}
             <div className="flex items-center gap-3">
-              <div className="flex -space-x-2">
-                {['#c4e4d9', '#a7dfca', '#8ecab4', '#5aaa8a'].map((color, i) => (
-                  <div
-                    key={i}
-                    className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-xs font-semibold text-[var(--paymint-primary-700)]"
-                    style={{ backgroundColor: color }}
-                  >
-                    {['M', 'Y', 'P', 'A'][i]}
-                  </div>
-                ))}
-              </div>
               <div>
                 <div className="flex items-center gap-1">
                   {[...Array(5)].map((_, i) => (
@@ -231,10 +219,9 @@ export default function Landing() {
           </p>
           <Link
             to="/signup"
-            className="inline-flex items-center gap-2 h-12 px-8 text-base font-semibold text-white bg-[var(--paymint-primary-600)] rounded-full hover:bg-[var(--paymint-primary-500)] transition-colors"
+            className="inline-flex items-center h-9 px-4 text-sm font-semibold text-white bg-[var(--paymint-primary-600)] rounded-full hover:bg-[var(--paymint-primary-500)] transition-colors"
           >
-            Start for free
-            <ArrowRight className="w-4 h-4" />
+            Start free
           </Link>
         </div>
       </section>
