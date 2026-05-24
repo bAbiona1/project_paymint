@@ -58,11 +58,6 @@ Inspired by products like:
 
 ---
 
-## Screenshots
-
-Add screenshots here after deployment.
-
----
 
 ## Local Development
 
