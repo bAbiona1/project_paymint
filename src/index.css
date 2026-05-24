@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Brand Primary: Deep Sage Green */
+  --paymint-primary-950: #0d1f1a;
+  --paymint-primary-900: #132b24;
+  --paymint-primary-800: #1a3a30;
+  --paymint-primary-700: #1f4a3c;
+  --paymint-primary-600: #265c4a;
+  --paymint-primary-500: #2d7059;
+  --paymint-primary-400: #3a8f70;
+  --paymint-primary-300: #5aaa8a;
+  --paymint-primary-200: #8ecab4;
+  --paymint-primary-100: #c4e4d9;
+  --paymint-primary-50: #edf7f3;
+
+  /* Accent */
+  --paymint-accent-600: #3d4f6e;
+  --paymint-accent-500: #4a5f84;
+  --paymint-accent-400: #6278a0;
+  --paymint-accent-100: #dde3ef;
+  --paymint-accent-50: #f0f3f8;
+
+  /* Surface Colors */
+  --paymint-surface-bg: #f7f8f9;
+  --paymint-surface-card: #ffffff;
+  --paymint-surface-subtle: #f2f4f6;
+  --paymint-surface-border: #e5e8ec;
+  --paymint-surface-divider: #eceef1;
+
+  /* Text Hierarchy */
+  --paymint-text-primary: #0f1923;
+  --paymint-text-secondary: #4a5568;
+  --paymint-text-tertiary: #8896a4;
+  --paymint-text-disabled: #b0bcc8;
+  --paymint-text-inverse: #ffffff;
+
+  /* Status Colors */
+  --paymint-success-bg: #edfaf4;
+  --paymint-success-text: #1a6b45;
+  --paymint-success-border: #a7dfca;
+
+  --paymint-warning-bg: #fef9ec;
+  --paymint-warning-text: #7a5a0d;
+  --paymint-warning-border: #f5d87a;
+
+  --paymint-danger-bg: #fff1f1;
+  --paymint-danger-text: #8b1a1a;
+  --paymint-danger-border: #f5b4b4;
+
+  --paymint-info-bg: #eef4fd;
+  --paymint-info-text: #1e4d8c;
+  --paymint-info-border: #a8c5f0;
+
+  --paymint-neutral-bg: #f2f4f6;
+  --paymint-neutral-text: #5a6473;
+  --paymint-neutral-border: #d1d8e0;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    color: var(--paymint-text-primary);
+    background-color: var(--paymint-surface-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--paymint-primary-600);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+@layer components {
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--paymint-surface-subtle) 25%,
+      var(--paymint-surface-border) 50%,
+      var(--paymint-surface-subtle) 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-shimmer 1.4s linear infinite;
+    border-radius: 4px;
+  }
+}
