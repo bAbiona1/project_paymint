@@ -4,7 +4,7 @@ import { useClient } from '../../hooks/useClients';
 import { useInvoices } from '../../hooks/useInvoices';
 import Button from '../../components/ui/Button';
 import StatusBadge from '../../components/ui/StatusBadge';
-import { formatCurrency, formatDate } from '../../lib/utils';
+import { formatCurrency, formatDate, getInitials } from '../../lib/utils';
 import type { Invoice } from '../../lib/supabase';
 
 export default function ClientDetail() {
@@ -44,7 +44,18 @@ export default function ClientDetail() {
         >
           <ArrowLeft className="w-4 h-4" />
         </button>
-        <h1 className="text-2xl font-semibold text-[var(--paymint-text-primary)] tracking-tight">{client.name}</h1>
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-full bg-[var(--paymint-primary-100)] overflow-hidden flex items-center justify-center flex-shrink-0">
+            {client.notes?.startsWith('LOGO_DATA:') ? (
+              <img src={client.notes.split('|||')[0].replace('LOGO_DATA:', '')} className="w-full h-full object-cover" alt="" />
+            ) : (
+              <span className="text-xs font-semibold text-[var(--paymint-primary-700)]">
+                {getInitials(client.name)}
+              </span>
+            )}
+          </div>
+          <h1 className="text-2xl font-semibold text-[var(--paymint-text-primary)] tracking-tight">{client.name}</h1>
+        </div>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-6 mb-6">
@@ -96,7 +107,9 @@ export default function ClientDetail() {
           {client.notes && (
             <div className="mt-4 pt-4 border-t border-[var(--paymint-surface-divider)]">
               <p className="text-xs text-[var(--paymint-text-tertiary)] mb-1">Notes</p>
-              <p className="text-sm text-[var(--paymint-text-secondary)]">{client.notes}</p>
+              <p className="text-sm text-[var(--paymint-text-secondary)]">
+                {client.notes.startsWith('LOGO_DATA:') ? client.notes.split('|||')[1] || '' : client.notes}
+              </p>
             </div>
           )}
         </div>
