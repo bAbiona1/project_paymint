@@ -103,15 +103,15 @@ export default function InvoiceDetail() {
   return (
     <div className="print:p-0">
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-6 print:hidden">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 print:hidden">
+        <div className="flex items-center gap-3 flex-wrap">
           <button
             onClick={() => navigate('/app/invoices')}
             className="p-1.5 rounded-md text-[var(--paymint-text-tertiary)] hover:bg-[var(--paymint-surface-subtle)] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
           </button>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-wrap">
             <h1 className="text-2xl font-semibold font-mono text-[var(--paymint-text-primary)]">
               {invoice.invoice_number}
             </h1>
@@ -166,8 +166,8 @@ export default function InvoiceDetail() {
         {/* Invoice body */}
         <div className="lg:col-span-2 space-y-6">
           {/* Parties */}
-          <div className="bg-white border border-[var(--paymint-surface-border)] rounded-xl p-6 shadow-sm">
-            <div className="flex flex-wrap justify-between gap-6">
+          <div className="bg-white border border-[var(--paymint-surface-border)] rounded-xl p-4 sm:p-6 shadow-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <p className="text-xs font-semibold tracking-wider uppercase text-[var(--paymint-text-tertiary)] mb-2">Bill To</p>
                 <p className="text-sm font-semibold text-[var(--paymint-text-primary)]">{client?.name}</p>
@@ -175,7 +175,7 @@ export default function InvoiceDetail() {
                 {client?.email && <p className="text-sm text-[var(--paymint-text-secondary)]">{client.email}</p>}
                 {client?.address && <p className="text-sm text-[var(--paymint-text-secondary)]">{client.address}</p>}
               </div>
-              <div className="text-left lg:text-right">
+              <div className="text-left sm:text-right">
                 <p className="text-xs font-semibold tracking-wider uppercase text-[var(--paymint-text-tertiary)] mb-2">Invoice Details</p>
                 <p className="text-sm text-[var(--paymint-text-secondary)]">
                   <span className="text-[var(--paymint-text-tertiary)]">Issued: </span>{formatDate(invoice.issue_date)}
@@ -195,8 +195,8 @@ export default function InvoiceDetail() {
           </div>
 
           {/* Line items */}
-          <div className="bg-white border border-[var(--paymint-surface-border)] rounded-xl shadow-sm overflow-hidden">
-            <div className="overflow-x-auto">
+          <div className="bg-white border border-[var(--paymint-surface-border)] rounded-xl shadow-sm overflow-hidden w-full min-w-0">
+            <div className="overflow-x-auto w-full">
               <table className="w-full">
                 <thead>
                   <tr className="bg-[var(--paymint-surface-bg)] border-b border-[var(--paymint-surface-border)]">
@@ -224,8 +224,8 @@ export default function InvoiceDetail() {
             </div>
 
             {/* Totals */}
-            <div className="border-t border-[var(--paymint-surface-border)] px-6 py-4">
-              <div className="ml-auto max-w-[280px] space-y-2">
+            <div className="border-t border-[var(--paymint-surface-border)] px-4 sm:px-6 py-4">
+              <div className="ml-auto max-w-[280px] w-full space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-[var(--paymint-text-secondary)]">Subtotal</span>
                   <span className="font-mono text-[var(--paymint-text-primary)]">{formatCurrency(invoice.subtotal)}</span>
