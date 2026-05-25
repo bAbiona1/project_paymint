@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Receipt as ReceiptIcon, Eye, FileText } from 'lucide-react';
 import { useReceipts } from '../../hooks/useReceipts';
 import StatusBadge from '../../components/ui/StatusBadge';
@@ -6,6 +6,7 @@ import { formatCurrency, formatDate } from '../../lib/utils';
 import type { Invoice, Client } from '../../lib/supabase';
 
 export default function Receipts() {
+  const navigate = useNavigate();
   const { receipts, loading } = useReceipts();
 
   return (
@@ -17,7 +18,7 @@ export default function Receipts() {
         </p>
       </div>
 
-      <div className="bg-white border border-[var(--paymint-surface-border)] rounded-xl shadow-sm overflow-hidden">
+      <div className="bg-white border border-[var(--paymint-surface-border)] rounded-xl shadow-sm overflow-hidden w-full min-w-0">
         {loading ? (
           <div className="p-6 space-y-4">
             {Array(4).fill(0).map((_, i) => (
@@ -62,7 +63,11 @@ export default function Receipts() {
                 {receipts.map((r) => {
                   const inv = r.invoice as Invoice & { client: Client };
                   return (
-                    <tr key={r.id} className="hover:bg-[var(--paymint-surface-subtle)] transition-colors duration-[80ms]">
+                    <tr
+                      key={r.id}
+                      className="hover:bg-[var(--paymint-surface-subtle)] transition-colors duration-[80ms] cursor-pointer"
+                      onClick={() => navigate(`/app/receipts/${r.id}`)}
+                    >
                       <td className="px-6 py-3.5 font-mono text-sm font-medium text-[var(--paymint-text-primary)]">
                         {r.receipt_number}
                       </td>
@@ -81,7 +86,7 @@ export default function Receipts() {
                       <td className="px-4 py-3.5 text-center hidden sm:table-cell">
                         <StatusBadge status="paid" />
                       </td>
-                      <td className="px-4 py-3.5">
+                      <td className="px-4 py-3.5" onClick={(e) => e.stopPropagation()}>
                         <Link
                           to={`/app/receipts/${r.id}`}
                           className="p-1.5 rounded-md text-[var(--paymint-text-tertiary)] hover:bg-[var(--paymint-surface-subtle)] hover:text-[var(--paymint-text-primary)] transition-colors inline-flex"
