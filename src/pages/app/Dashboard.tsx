@@ -36,7 +36,7 @@ function CustomTooltip({ active, payload, label }: { active?: boolean; payload?:
 
 function SkeletonCard() {
   return (
-    <div className="bg-white border border-[var(--paymint-surface-border)] rounded-xl p-6">
+    <div className="bg-white border border-[var(--paymint-surface-border)] rounded-xl p-3.5 sm:p-5">
       <div className="skeleton h-3 w-20 mb-4" />
       <div className="skeleton h-8 w-32 mb-2" />
       <div className="skeleton h-3 w-24" />
@@ -81,7 +81,7 @@ export default function Dashboard() {
   return (
     <div>
       {/* Page header */}
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-2xl font-semibold text-[var(--paymint-text-primary)] tracking-tight">
             Hello, {firstName}
@@ -102,32 +102,32 @@ export default function Dashboard() {
           : kpiCards.map(({ label, value, icon: Icon, sub }) => (
               <div
                 key={label}
-                className="bg-white border border-[var(--paymint-surface-border)] rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow duration-200"
+                className="bg-white border border-[var(--paymint-surface-border)] rounded-xl p-3.5 sm:p-5 shadow-sm hover:shadow-md transition-shadow duration-200"
               >
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="w-8 h-8 rounded-lg bg-[var(--paymint-surface-subtle)] flex items-center justify-center">
+                <div className="flex items-center gap-1.5 sm:gap-2 mb-2.5 sm:mb-3">
+                  <div className="w-8 h-8 rounded-lg bg-[var(--paymint-surface-subtle)] flex items-center justify-center flex-shrink-0">
                     <Icon className="w-4 h-4 text-[var(--paymint-text-tertiary)]" />
                   </div>
-                  <span className="text-xs font-medium text-[var(--paymint-text-secondary)]">{label}</span>
+                  <span className="text-xs font-medium text-[var(--paymint-text-secondary)] truncate">{label}</span>
                 </div>
-                <p className="text-2xl font-semibold font-mono text-[var(--paymint-text-primary)] tracking-tight mb-1">
+                <p className="text-lg sm:text-2xl font-semibold font-mono text-[var(--paymint-text-primary)] tracking-tight mb-1 truncate">
                   {value}
                 </p>
-                <p className="text-xs text-[var(--paymint-text-tertiary)]">{sub}</p>
+                <p className="text-xs text-[var(--paymint-text-tertiary)] truncate">{sub}</p>
               </div>
             ))}
       </div>
 
       {/* Revenue Chart */}
-      <div className="bg-white border border-[var(--paymint-surface-border)] rounded-xl p-6 mb-6 shadow-sm">
-        <div className="flex items-center justify-between mb-6">
+      <div className="bg-white border border-[var(--paymint-surface-border)] rounded-xl p-4 sm:p-6 mb-6 shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
           <h2 className="text-base font-semibold text-[var(--paymint-text-primary)]">Revenue</h2>
-          <div className="flex gap-1">
+          <div className="flex gap-1 overflow-x-auto scrollbar-none py-0.5">
             {timeRanges.map(({ label, value }) => (
               <button
                 key={value}
                 onClick={() => setTimeRange(value)}
-                className={`h-8 px-3 text-xs font-medium rounded-full transition-colors whitespace-nowrap ${
+                className={`h-7 sm:h-8 px-2.5 sm:px-3 text-[10px] sm:text-xs font-medium rounded-full transition-colors whitespace-nowrap ${
                   timeRange === value
                     ? 'bg-[var(--paymint-text-primary)] text-white'
                     : 'text-[var(--paymint-text-secondary)] hover:bg-[var(--paymint-surface-subtle)]'
