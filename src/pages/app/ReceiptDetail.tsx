@@ -37,8 +37,8 @@ export default function ReceiptDetail() {
   return (
     <div>
       {/* Actions bar */}
-      <div className="flex items-center justify-between gap-4 mb-6 print:hidden">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 print:hidden">
+        <div className="flex items-center gap-3 flex-wrap">
           <button
             onClick={() => navigate('/app/receipts')}
             className="p-1.5 rounded-md text-[var(--paymint-text-tertiary)] hover:bg-[var(--paymint-surface-subtle)] transition-colors"
@@ -66,13 +66,13 @@ export default function ReceiptDetail() {
       </div>
 
       {/* Receipt document */}
-      <div className="max-w-[640px] mx-auto bg-white border border-[var(--paymint-surface-border)] rounded-xl shadow-lg overflow-hidden print:shadow-none print:border-none">
+      <div className="max-w-[640px] mx-auto bg-white border border-[var(--paymint-surface-border)] rounded-xl shadow-lg overflow-hidden w-full min-w-0 print:shadow-none print:border-none">
         {/* Brand bar */}
         <div className="h-1 bg-[var(--paymint-primary-600)]" />
 
-        <div className="p-8 lg:p-10">
+        <div className="p-4 sm:p-8 lg:p-10">
           {/* Header */}
-          <div className="flex flex-wrap justify-between gap-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
             <div>
               <Logo size="sm" />
               {profile?.business_name && (
@@ -82,7 +82,7 @@ export default function ReceiptDetail() {
                 <p className="text-xs text-[var(--paymint-text-tertiary)]">{profile.business_address}</p>
               )}
             </div>
-            <div className="text-left lg:text-right">
+            <div className="text-left sm:text-right">
               <p className="text-xs font-semibold tracking-[0.08em] uppercase text-[var(--paymint-text-tertiary)] mb-2">Receipt</p>
               <p className="text-sm font-mono font-semibold text-[var(--paymint-text-primary)]">{receipt.receipt_number}</p>
               <p className="text-xs text-[var(--paymint-text-tertiary)] mt-1">
