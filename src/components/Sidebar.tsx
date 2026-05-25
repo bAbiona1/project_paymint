@@ -50,7 +50,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
       {/* Sidebar */}
       <aside
         className={`
-          fixed inset-y-0 left-0 z-50 w-[240px] bg-white border-r border-[var(--paymint-surface-border)] flex flex-col
+          fixed inset-y-0 left-0 z-50 w-[240px] h-[100dvh] bg-white border-r border-[var(--paymint-surface-border)] flex flex-col
           transition-transform duration-[240ms] ease-out
           ${open ? 'translate-x-0' : '-translate-x-full'}
           lg:translate-x-0 lg:static lg:z-auto
