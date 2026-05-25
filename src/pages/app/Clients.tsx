@@ -168,7 +168,7 @@ export default function Clients() {
 
   return (
     <div>
-      <div className="flex items-start justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6">
         <div>
           <h1 className="text-2xl font-semibold text-[var(--paymint-text-primary)] tracking-tight">Clients</h1>
           <p className="text-sm text-[var(--paymint-text-tertiary)] mt-0.5">Manage your client relationships.</p>
