@@ -28,7 +28,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
         </header>
 
         {/* Main content */}
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto overflow-x-hidden">
           <div className="max-w-[1200px] mx-auto px-4 lg:px-8 py-6 lg:py-8">
             {children}
           </div>
