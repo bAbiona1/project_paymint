@@ -162,9 +162,9 @@ export default function InvoiceDetail() {
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid lg:grid-cols-3 gap-6 w-full min-w-0">
         {/* Invoice body */}
-        <div className="lg:col-span-2 space-y-6">
+        <div className="lg:col-span-2 space-y-6 w-full min-w-0">
           {/* Parties */}
           <div className="bg-white border border-[var(--paymint-surface-border)] rounded-xl p-4 sm:p-6 shadow-sm">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -272,7 +272,7 @@ export default function InvoiceDetail() {
         </div>
 
         {/* Right sidebar */}
-        <div className="space-y-4 print:hidden">
+        <div className="space-y-4 print:hidden w-full min-w-0">
           {/* Payment summary */}
           <div className="bg-white border border-[var(--paymint-surface-border)] rounded-xl p-5 shadow-sm">
             <h3 className="text-sm font-semibold text-[var(--paymint-text-primary)] mb-4">Payment Summary</h3>
