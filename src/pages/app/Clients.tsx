@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, Search, Building2, Mail, Phone, Eye, Pencil, Trash2, Users } from 'lucide-react';
+import { Plus, Search, Building2, Mail, Phone, Eye, Pencil, Trash2, Users, Upload, X } from 'lucide-react';
 import { useClients } from '../../hooks/useClients';
 import Button from '../../components/ui/Button';
 import Modal from '../../components/ui/Modal';
@@ -37,12 +37,53 @@ function ClientForm({
   onCancel: () => void;
   loading: boolean;
 }) {
-  const [form, setForm] = useState<ClientFormData>(initial || emptyForm);
+  let initialLogo = '';
+  let initialNotes = initial?.notes || '';
+  if (initialNotes.startsWith('LOGO_DATA:')) {
+    const parts = initialNotes.split('|||');
+    initialLogo = parts[0].replace('LOGO_DATA:', '');
+    initialNotes = parts[1] || '';
+  }
+
+  const [form, setForm] = useState<ClientFormData>({
+    name: initial?.name || '',
+    email: initial?.email || '',
+    phone: initial?.phone || '',
+    company: initial?.company || '',
+    address: initial?.address || '',
+    city: initial?.city || '',
+    country: initial?.country || '',
+    notes: initialNotes,
+  });
+
+  const [logo, setLogo] = useState<string>(initialLogo);
   const [errors, setErrors] = useState<Partial<ClientFormData>>({});
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   function set(k: keyof ClientFormData, v: string) {
     setForm((f) => ({ ...f, [k]: v }));
     if (errors[k]) setErrors((e) => ({ ...e, [k]: '' }));
+  }
+
+  function handleLogoChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error('Logo image size must be under 2MB');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setLogo(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function removeLogo() {
+    setLogo('');
+    if (fileInputRef.current) fileInputRef.current.value = '';
   }
 
   function handleSubmit() {
@@ -50,11 +91,56 @@ function ClientForm({
       setErrors({ name: 'Name is required' });
       return;
     }
-    onSubmit(form);
+    const notesWithLogo = logo ? `LOGO_DATA:${logo}|||${form.notes}` : form.notes;
+    onSubmit({ ...form, notes: notesWithLogo });
   }
 
   return (
     <div className="space-y-4 pb-4">
+      {/* Logo upload block */}
+      <div className="flex flex-col items-center justify-center p-4 border border-dashed border-[var(--paymint-surface-border)] rounded-xl bg-[var(--paymint-surface-bg)]">
+        <label className="text-xs font-semibold text-[var(--paymint-text-secondary)] mb-3">Client Logo / Avatar</label>
+        <div className="relative group">
+          <div className="w-20 h-20 rounded-full border border-[var(--paymint-surface-border)] bg-white overflow-hidden flex items-center justify-center shadow-sm">
+            {logo ? (
+              <img src={logo} className="w-full h-full object-cover" alt="Client Logo" />
+            ) : (
+              <Users className="w-8 h-8 text-[var(--paymint-text-tertiary)]" />
+            )}
+          </div>
+          {logo && (
+            <button
+              type="button"
+              onClick={removeLogo}
+              className="absolute -top-1.5 -right-1.5 p-1 rounded-full bg-[var(--paymint-danger-bg)] text-[var(--paymint-danger-text)] hover:bg-[var(--paymint-surface-subtle)] border border-[var(--paymint-danger-border)] shadow-sm transition-colors"
+              title="Remove logo"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
+        </div>
+        <div className="mt-3">
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleLogoChange}
+            accept="image/*"
+            className="hidden"
+            id="client-logo-upload"
+          />
+          <Button
+            type="button"
+            variant="secondary"
+            size="sm"
+            icon={<Upload className="w-3.5 h-3.5" />}
+            onClick={() => fileInputRef.current?.click()}
+          >
+            {logo ? 'Change Image' : 'Upload Image'}
+          </Button>
+        </div>
+        <p className="text-[10px] text-[var(--paymint-text-tertiary)] mt-1.5">Supports JPG, PNG under 2MB</p>
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Input
           label="Full name"
@@ -236,10 +322,14 @@ export default function Clients() {
                   <tr key={client.id} className="hover:bg-[var(--paymint-surface-subtle)] transition-colors duration-[80ms]">
                     <td className="px-6 py-3.5">
                       <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-[var(--paymint-primary-100)] flex items-center justify-center flex-shrink-0">
-                          <span className="text-xs font-semibold text-[var(--paymint-primary-700)]">
-                            {getInitials(client.name)}
-                          </span>
+                        <div className="w-9 h-9 rounded-full bg-[var(--paymint-primary-100)] overflow-hidden flex items-center justify-center flex-shrink-0">
+                          {client.notes?.startsWith('LOGO_DATA:') ? (
+                            <img src={client.notes.split('|||')[0].replace('LOGO_DATA:', '')} className="w-full h-full object-cover" alt="" />
+                          ) : (
+                            <span className="text-xs font-semibold text-[var(--paymint-primary-700)]">
+                              {getInitials(client.name)}
+                            </span>
+                          )}
                         </div>
                         <div>
                           <p className="text-sm font-medium text-[var(--paymint-text-primary)]">{client.name}</p>
